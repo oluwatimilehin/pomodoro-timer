@@ -71,20 +71,20 @@
             },
             startTimer: function () {
                 function reduceSeconds() {
-
                     if (this.seconds.textContent === "00") {
                         this.currentSeconds = 60;
                         this.currentSeconds--;
-                        if (this.currentSeconds <= 0) {
-                            debugger;
-                            this.seconds.textContent = "00";
-                        }
                         this.seconds.textContent = this.currentSeconds;
 
                     }
                     else {
                         this.currentSeconds--;
+                        if (this.currentSeconds === 0) {
+                            this.seconds.textContent = "00";
+                        }
+                        else{
                         this.seconds.textContent = this.currentSeconds;
+                        }
                     }
                 }
                 setInterval(function () {
