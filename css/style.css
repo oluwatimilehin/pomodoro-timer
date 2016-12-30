@@ -113,4 +113,11 @@ body{
 .time-settings{
     display: flex;
     align-items: center;
+    justify-content: flex-end;
+}
+#plus{
+    margin-right: 10px;
+}
+#minus{
+    margin-left: 10px;
 }
