@@ -58,12 +58,24 @@ body, html{
 h3{
     font-size: 1.6em;
 }
+h2{
+    font-size: 3.1em;
+}
 body{
     background: #F6F6EF;
     font-family: 'Raleway', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.time-settings > .arithmetic-controls{
+    font-size: 2em;
+}
+.time-settings> .time{
+    font-size: 5em;
+}
+.timer>#work{
+    padding-top: 60px;
 }
 
 .container{
@@ -87,10 +99,18 @@ body{
 }
 
 .timer-container>.timer{
-    width: 270px;
-    height: 270px;
+    display: flex;
+    /*justify-content: center;*/
+    align-items: center;
+    flex-direction: column;
+    width: 300px;
+    height: 300px;
     /*background: blue;*/
     border-radius:50%;
     margin-top: 15px;
-    border: 1px solid black;
+    border: 1.3px solid black;
+}
+.time-settings{
+    display: flex;
+    align-items: center;
 }
