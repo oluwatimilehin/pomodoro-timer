@@ -74,7 +74,7 @@ body{
 .time-settings> .time{
     font-size: 5em;
 }
-.timer>#work{
+.timer>.work{
     padding-top: 60px;
 }
 
