@@ -35,6 +35,8 @@
         var controls = {
             minutes: document.getElementById('minutes'),
             seconds: document.getElementById('seconds'),
+            currentMinutes: parseInt(this.minutes.textContent),
+            currentSeconds: parseInt(this.seconds.textContent),
             setToWorkMode: function () {
                 this.minutes.textContent = "25";
                 this.seconds.textContent = "00";
@@ -42,6 +44,10 @@
             setToBreakMode: function () {
                 this.minutes.textContent = "05";
                 this.seconds.textContent = "00";
+            },
+            increaseTime: function () {
+                this.minutes.textContent = this.currentMinutes++;
+                this.seconds.textContent = this.currentSeconds + 30;
             }
         }
         var view = {
@@ -53,6 +59,10 @@
                 var breakButton = document.getElementById('break');
                 breakButton.addEventListener('click', function () {
                     controls.setToBreakMode();
+                });
+                var plusButton = document.getElementById('plus');
+                plusButton.addEventListener('click', function () {
+                    controls.increaseTime();
                 })
             }
         }
