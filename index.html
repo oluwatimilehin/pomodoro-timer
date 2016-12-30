@@ -20,7 +20,7 @@
                 <h2 class="work">Work</h2>
                 <div class="time-settings">
                     <p id="plus" class="arithmetic-controls"><a href="#">+</a></p>
-                    <p class="time"> <span id="minutes">21</span> : <span id="seconds">10</span></p>
+                    <p class="time"> <span id="minutes">21</span> : <span id="seconds">00</span></p>
                     <p id="minus" class="arithmetic-controls"><a href="#">- </a></p>
                 </div>
             </div>
@@ -46,8 +46,16 @@
                 this.seconds.textContent = "00";
             },
             increaseTime: function () {
-                this.minutes.textContent = this.currentMinutes++;
-                this.seconds.textContent = this.currentSeconds + 30;
+                this.currentSeconds += 30;
+                if (this.currentSeconds === 30) {
+                    this.seconds.textContent = this.currentSeconds;
+                }
+                else {
+                    this.seconds.textContent = "00";
+                    this.currentMinutes++;
+                    this.minutes.textContent = this.currentMinutes;
+                    this.currentSeconds = 0;
+                }
             }
         }
         var view = {
