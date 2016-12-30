@@ -12,8 +12,8 @@
 <body>
     <div class="container">
         <div class="mode">
-            <h3 class="has-border" id="work">Work </h3>
-            <h3 class="has-border" id="break">Break </h3>
+            <h3 class="has-border" id="work"><a href="#">Work </a> </h3>
+            <h3 class="has-border" id="break"> <a href="#"> Break </a> </h3>
         </div>
         <div class="timer-container">
             <div class="timer">
@@ -21,30 +21,42 @@
                 <div class="time-settings">
                     <p id="plus" class="arithmetic-controls"><a href="#">+</a></p>
                     <p class="time"> <span id="minutes">21</span> : <span id="seconds">10</span></p>
-                    <p id="minus" class="arithmetic-controls">-</p>
+                    <p id="minus" class="arithmetic-controls"><a href="#">- </a></p>
                 </div>
             </div>
         </div>
         <div class="timer-control">
-            <h3 class="has-border" id="start">Start </h3>
-            <h3 class="has-border" id="reset">Reset </h3>
+            <h3 class="has-border" id="start"> <a href="#">Start </a> </h3>
+            <h3 class="has-border" id="reset"><a href="#">Reset </a> </h3>
         </div>
     </div>
 
     <script>
         var controls = {
+            minutes: document.getElementById('minutes'),
+            seconds: document.getElementById('seconds'),
             setToWorkMode: function () {
-                var minutes = document.getElementById('minutes');
-                var seconds = document.getElementById('seconds');
-                minutes.textContent = "25";
-                seconds.textContent = "00";
+                this.minutes.textContent = "25";
+                this.seconds.textContent = "00";
+            },
+            setToBreakMode: function () {
+                this.minutes.textContent = "05";
+                this.seconds.textContent = "00";
             }
         }
-        var plus = document.getElementById('plus');
-        plus.addEventListener('click', function () {
-            controls.setToWorkMode();
-        });
-
+        var view = {
+            setUpEventListeners: function () {
+                var workButton = document.getElementById('work');
+                workButton.addEventListener('click', function () {
+                    controls.setToWorkMode();
+                });
+                var breakButton = document.getElementById('break');
+                breakButton.addEventListener('click', function () {
+                    controls.setToBreakMode();
+                })
+            }
+        }
+        view.setUpEventListeners();
     </script>
 </body>
 
