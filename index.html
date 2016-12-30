@@ -56,6 +56,18 @@
                     this.minutes.textContent = this.currentMinutes;
                     this.currentSeconds = 0;
                 }
+            },
+            decreaseTime: function () {
+                this.currentSeconds -= 30;
+                if (this.currentSeconds === 0) {
+                    this.seconds.textContent = "00";
+                }
+                else {
+                    this.seconds.textContent = "30";
+                    this.currentSeconds = 30;
+                    this.currentMinutes--;
+                    this.minutes.textContent = this.currentMinutes;
+                }
             }
         }
         var view = {
@@ -71,7 +83,11 @@
                 var plusButton = document.getElementById('plus');
                 plusButton.addEventListener('click', function () {
                     controls.increaseTime();
-                })
+                });
+                var minusButton = document.getElementById('minus');
+                minusButton.addEventListener('click', function () {
+                    controls.decreaseTime();
+                });
             }
         }
         view.setUpEventListeners();
