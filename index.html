@@ -19,8 +19,8 @@
             <div class="timer">
                 <h2 class="work">Work</h2>
                 <div class="time-settings">
-                    <p id="plus" class="arithmetic-controls">+</p>
-                    <p class="time"> <span id="minutes">25</span> : <span id="seconds">00</span></p>
+                    <p id="plus" class="arithmetic-controls"><a href="#">+</a></p>
+                    <p class="time"> <span id="minutes">21</span> : <span id="seconds">10</span></p>
                     <p id="minus" class="arithmetic-controls">-</p>
                 </div>
             </div>
@@ -32,6 +32,18 @@
     </div>
 
     <script>
+        var controls = {
+            setToWorkMode: function () {
+                var minutes = document.getElementById('minutes');
+                var seconds = document.getElementById('seconds');
+                minutes.textContent = "25";
+                seconds.textContent = "00";
+            }
+        }
+        var plus = document.getElementById('plus');
+        plus.addEventListener('click', function () {
+            controls.setToWorkMode();
+        });
 
     </script>
 </body>
