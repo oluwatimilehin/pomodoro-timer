@@ -67,13 +67,30 @@ body{
 }
 
 .container{
-    background-color: red;
+    /*background-color: red;*/
     width: 500px;
-    height: 400px;
+    height: 430px;
 }
-.mode{
+.mode, .timer-control{
     display: flex;
     justify-content: space-around;
-    padding:10px 0 0 90px;
+    padding:10px 0 0 0px;
+}
+.has-border{
+    border: 1px solid #000000;
+    padding: 12px;
+    border-radius: 4px;
+}
+.timer-container{
+    display: flex;
+    justify-content: center;
+}
 
+.timer-container>.timer{
+    width: 270px;
+    height: 270px;
+    /*background: blue;*/
+    border-radius:50%;
+    margin-top: 15px;
+    border: 1px solid black;
 }
