@@ -107,27 +107,37 @@
         var view = {
             setUpEventListeners: function () {
                 var workButton = document.getElementById('work');
-                workButton.addEventListener('click', function () {
+                workButton.addEventListener('click', workMode);
+                var workMode = function () {
                     controls.setToWorkMode();
-                });
+                };
+
                 var breakButton = document.getElementById('break');
-                breakButton.addEventListener('click', function () {
+                breakButton.addEventListener('click', breakMode);
+                var breakMode = function () {
                     controls.setToBreakMode();
-                });
+                }
                 var plusButton = document.getElementById('plus');
-                plusButton.addEventListener('click', function () {
+                plusButton.addEventListener('click', increaseTime);
+                var increaseTime = function () {
                     controls.increaseTime();
-                });
+                }
+
                 var minusButton = document.getElementById('minus');
-                minusButton.addEventListener('click', function () {
+                minusButton.addEventListener('click', decreaseTime);
+                var decreaseTime = function () {
                     controls.decreaseTime();
-                });
+                };
                 var startButton = document.getElementById('start');
                 var clicked = 0;
                 startButton.addEventListener('click', function () {
                     if (clicked === 0) {
                         controls.startTimer();
                         clicked++;
+                        workButton.removeEventListener('click', workMode);
+                        breakButton.removeEventListener('click', breakMode);
+                        plusButton.removeEventListener('click', increaseTime);
+                        minusButton.removeEventListener('click', decreaseTime);
                     }
                 });
             }
