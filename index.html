@@ -111,6 +111,10 @@
                 var workMode = function () {
                     controls.setToWorkMode();
                 };
+                var resetButton = document.getElementById('reset');
+                resetButton.addEventListener('click', function () {
+                    controls.setToWorkMode();
+                })
 
                 var breakButton = document.getElementById('break');
                 breakButton.addEventListener('click', breakMode);
