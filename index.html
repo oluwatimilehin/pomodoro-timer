@@ -74,11 +74,15 @@
             },
             startTimer: function () {
                 function reduceSeconds() {
+                    if (this.seconds.textContent === "00" && (this.minutes.textContent === "0" || this.minutes.textContent === "00")) {
+                        return;
+                    }
                     if (this.seconds.textContent === "00") {
                         this.currentSeconds = 60;
                         this.currentSeconds--;
                         if (this.minutes.textContent <= 10) {
                             this.minutes.textContent--;
+                            this.seconds.textContent;
                             this.minutes.textContent = "0" + this.minutes.textContent;
                         }
                         else {
@@ -87,21 +91,19 @@
                         this.seconds.textContent = this.currentSeconds;
                     }
                     else {
-                        this.currentSeconds--;
-                        if (this.currentSeconds === 0) {
+                        this.seconds.textContent--;
+                        if (this.seconds.textContent === 0) {
                             this.seconds.textContent = "00";
                         }
                         else {
-                            if (this.currentSeconds < 10) {
-                                this.seconds.textContent = "0" + this.currentSeconds;
-                            }
-                            else {
-                                this.seconds.textContent = this.currentSeconds;
+                            if (this.seconds.textContent < 10) {
+                                this.seconds.textContent = "0" + this.seconds.textContent;
                             }
                         }
                     }
                 }
-                return interval = setInterval(reduceSeconds, 1000);
+                var interval = setInterval(reduceSeconds, 1000);
+
             }
         }
         var view = {
@@ -149,7 +151,6 @@
                 resetButton.addEventListener('click', function () {
                     controls.setToWorkMode();
                     clearInterval(controls.startTimer);
-                    startButton.removeEventListener('click', startTimer);
                 })
             }
         }
