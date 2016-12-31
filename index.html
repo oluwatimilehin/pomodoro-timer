@@ -17,7 +17,7 @@
         </div>
         <div class="timer-container">
             <div class="timer">
-                <h2 class="work">Work</h2>
+                <h2 class="work" id="mode">Work</h2>
                 <div class="time-settings">
                     <p id="plus" class="arithmetic-controls"><a href="#">+</a></p>
                     <p class="time"> <span id="minutes">25</span> : <span id="seconds">00</span></p>
@@ -33,6 +33,7 @@
 
     <script>
         var controls = {
+            modeSetting: document.getElementById('mode'),
             minutes: document.getElementById('minutes'),
             seconds: document.getElementById('seconds'),
             currentMinutes: parseInt(this.minutes.textContent),
@@ -40,10 +41,13 @@
             setToWorkMode: function () {
                 this.minutes.textContent = "25";
                 this.seconds.textContent = "00";
+                this.modeSetting.textContent = "Work";
             },
             setToBreakMode: function () {
+                debugger;
                 this.minutes.textContent = "05";
                 this.seconds.textContent = "00";
+                this.modeSetting.textContent = "Break";
             },
             increaseTime: function () {
                 this.currentSeconds += 30;
@@ -141,8 +145,8 @@
                 var resetButton = document.getElementById('reset');
                 resetButton.addEventListener('click', function () {
                     controls.setToWorkMode();
-                    clearInterval(controls.startTimer);
-                    startButton.removeEventListener('click', startTimer);
+                    // clearInterval(controls.startTimer);
+                    // startButton.removeEventListener('click', startTimer);
                 })
             }
         }
