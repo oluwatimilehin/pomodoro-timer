@@ -108,27 +108,31 @@
         var view = {
             setUpEventListeners: function () {
                 var workButton = document.getElementById('work');
-                workButton.addEventListener('click', workMode);
                 var workMode = function () {
                     controls.setToWorkMode();
                 };
+                workButton.addEventListener('click', workMode);
+
 
                 var breakButton = document.getElementById('break');
-                breakButton.addEventListener('click', breakMode);
                 var breakMode = function () {
                     controls.setToBreakMode();
                 }
+                breakButton.addEventListener('click', breakMode);
+
                 var plusButton = document.getElementById('plus');
-                plusButton.addEventListener('click', increaseTime);
                 var increaseTime = function () {
                     controls.increaseTime();
                 }
+                plusButton.addEventListener('click', increaseTime);
+
 
                 var minusButton = document.getElementById('minus');
-                minusButton.addEventListener('click', decreaseTime);
                 var decreaseTime = function () {
                     controls.decreaseTime();
                 };
+                minusButton.addEventListener('click', decreaseTime);
+
                 var startButton = document.getElementById('start');
                 var clicked = 0;
                 var startTimer = function () {
@@ -145,8 +149,8 @@
                 var resetButton = document.getElementById('reset');
                 resetButton.addEventListener('click', function () {
                     controls.setToWorkMode();
-                    // clearInterval(controls.startTimer);
-                    // startButton.removeEventListener('click', startTimer);
+                    clearInterval(controls.startTimer);
+                    startButton.removeEventListener('click', startTimer);
                 })
             }
         }
