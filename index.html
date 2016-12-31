@@ -20,7 +20,7 @@
                 <h2 class="work" id="mode">Work</h2>
                 <div class="time-settings">
                     <p id="plus" class="arithmetic-controls"><a href="#">+</a></p>
-                    <p class="time"> <span id="minutes">25</span> : <span id="seconds">00</span></p>
+                    <p class="time"> <span id="minutes">00</span> : <span id="seconds">10</span></p>
                     <p id="minus" class="arithmetic-controls"><a href="#">- </a></p>
                 </div>
             </div>
@@ -57,11 +57,17 @@
                     this.seconds.textContent = "00";
                     this.currentMinutes++;
                     this.minutes.textContent = this.currentMinutes;
+                    if (this.minutes.textContent < 10) {
+                        this.minutes.textContent = "0" + this.minutes.textContent;
+                    }
                     this.currentSeconds = 0;
                 }
             },
             decreaseTime: function () {
                 this.currentSeconds -= 30;
+                if (this.seconds.textContent === "00" && (this.minutes.textContent === "0" || this.minutes.textContent === "00")) {
+                    return;
+                }
                 if (this.currentSeconds === 0) {
                     this.seconds.textContent = "00";
                 }
@@ -70,40 +76,51 @@
                     this.currentSeconds = 30;
                     this.currentMinutes--;
                     this.minutes.textContent = this.currentMinutes;
+                    if (this.minutes.textContent < 10) {
+                        this.minutes.textContent = "0" + this.minutes.textContent;
+                    }
                 }
             },
             startTimer: function () {
+                var clicked = 0;
                 function reduceSeconds() {
                     if (this.seconds.textContent === "00" && (this.minutes.textContent === "0" || this.minutes.textContent === "00")) {
-                        return;
-                    }
-                    if (this.seconds.textContent === "00") {
-                        this.currentSeconds = 60;
-                        this.currentSeconds--;
-                        if (this.minutes.textContent <= 10) {
-                            this.minutes.textContent--;
-                            this.seconds.textContent;
-                            this.minutes.textContent = "0" + this.minutes.textContent;
-                        }
-                        else {
-                            this.minutes.textContent--;
-                        }
-                        this.seconds.textContent = this.currentSeconds;
+                        return null;
                     }
                     else {
-                        this.seconds.textContent--;
-                        if (this.seconds.textContent === 0) {
-                            this.seconds.textContent = "00";
+                        if (this.seconds.textContent === "00") {
+                            this.currentSeconds = 60;
+                            this.currentSeconds--;
+                            if (this.minutes.textContent <= 10) {
+                                this.minutes.textContent--;
+                                this.seconds.textContent;
+                                this.minutes.textContent = "0" + this.minutes.textContent;
+                            }
+                            else {
+                                this.minutes.textContent--;
+                            }
+                            this.seconds.textContent = this.currentSeconds;
                         }
                         else {
-                            if (this.seconds.textContent < 10) {
-                                this.seconds.textContent = "0" + this.seconds.textContent;
+                            this.seconds.textContent--;
+                            if (this.seconds.textContent === 0) {
+                                this.seconds.textContent = "00";
+                            }
+                            else {
+                                if (this.seconds.textContent < 10) {
+                                    this.seconds.textContent = "0" + this.seconds.textContent;
+                                }
                             }
                         }
                     }
                 }
-                var interval = setInterval(reduceSeconds, 1000);
-
+                if (clicked != null) {
+                    console.log(clicked);
+                    var interval = setInterval(reduceSeconds, 1000);
+                }
+            },
+            resetTimer: function () {
+                this.setToWorkMode();
             }
         }
         var view = {
@@ -137,6 +154,9 @@
                 var startButton = document.getElementById('start');
                 var clicked = 0;
                 var startTimer = function () {
+                    if (clicked === null) {
+                        return;
+                    }
                     if (clicked === 0) {
                         controls.startTimer();
                         clicked++;
@@ -145,12 +165,12 @@
                         plusButton.removeEventListener('click', increaseTime);
                         minusButton.removeEventListener('click', decreaseTime);
                     }
+
                 }
                 startButton.addEventListener('click', startTimer);
                 var resetButton = document.getElementById('reset');
                 resetButton.addEventListener('click', function () {
-                    controls.setToWorkMode();
-                    clearInterval(controls.startTimer);
+                    controls.resetTimer();
                 })
             }
         }
