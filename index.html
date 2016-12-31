@@ -74,22 +74,34 @@
                     if (this.seconds.textContent === "00") {
                         this.currentSeconds = 60;
                         this.currentSeconds--;
+                        if (this.minutes.textContent <= 10) {
+                            this.minutes.textContent--;
+                            this.minutes.textContent = "0" + this.minutes.textContent;
+                        }
+                        else {
+                            this.minutes.textContent--;
+                        }
                         this.seconds.textContent = this.currentSeconds;
-
                     }
                     else {
                         this.currentSeconds--;
                         if (this.currentSeconds === 0) {
                             this.seconds.textContent = "00";
                         }
-                        else{
-                        this.seconds.textContent = this.currentSeconds;
+                        else {
+                            if (this.currentSeconds < 10) {
+                                this.seconds.textContent = "0" + this.currentSeconds;
+                            }
+                            else {
+                                this.seconds.textContent = this.currentSeconds;
+                            }
                         }
                     }
                 }
-                setInterval(function () {
+                var interval = setInterval(function () {
                     reduceSeconds();
                 }, 1000);
+
             }
         }
         var view = {
