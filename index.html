@@ -39,7 +39,6 @@
             seconds: document.getElementById('seconds'),
             currentMinutes: parseInt(this.minutes.textContent),
             currentSeconds: parseInt(this.seconds.textContent),
-            interval: null,
             setToWorkMode: function () {
                 this.minutes.textContent = "25";
                 this.seconds.textContent = "00";
@@ -84,11 +83,10 @@
                 }
             },
             startTimer: function () {
-                interval: setInterval(reduceSeconds, 1000);
+                var interval = setInterval(reduceSeconds, 1000);
                 function reduceSeconds() {
                     if (this.seconds.textContent === "00" && (this.minutes.textContent === "0" || this.minutes.textContent === "00")) {
-                        clearInterval(this.interval);
-                        return null;
+                        clearInterval(interval);
                     }
                     else {
                         if (this.seconds.textContent === "00") {
@@ -159,6 +157,7 @@
                     breakButton.removeEventListener('click', breakMode);
                     plusButton.removeEventListener('click', increaseTime);
                     minusButton.removeEventListener('click', decreaseTime);
+                    startButton.removeEventListener('click', startTimer);
                 }
                 startButton.addEventListener('click', startTimer);
                 var resetButton = document.getElementById('reset');
