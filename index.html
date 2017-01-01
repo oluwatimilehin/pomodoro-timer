@@ -33,6 +33,33 @@
     <audio src="http://www.orangefreesounds.com/wp-content/uploads/2015/04/Loud-alarm-clock-sound.mp3" id="alarm" preload="auto">
     </audio>
     <script>
+        var clicked = 0;
+        var workButton = document.getElementById('work');
+        var breakButton = document.getElementById('break');
+        var plusButton = document.getElementById('plus');
+        var minusButton = document.getElementById('minus');
+        var startButton = document.getElementById('start');
+        var resetButton = document.getElementById('reset');
+        var workMode = function () {
+            controls.setToWorkMode();
+        };
+        var breakMode = function () {
+            controls.setToBreakMode();
+        }
+        var increaseTime = function () {
+            controls.increaseTime();
+        };
+        var decreaseTime = function () {
+            controls.decreaseTime();
+        };
+        var startTimer = function () {
+            controls.startTimer();
+            workButton.removeEventListener('click', workMode);
+            breakButton.removeEventListener('click', breakMode);
+            plusButton.removeEventListener('click', increaseTime);
+            minusButton.removeEventListener('click', decreaseTime);
+            startButton.removeEventListener('click', startTimer);
+        };
         var controls = {
             modeSetting: document.getElementById('mode'),
             minutes: document.getElementById('minutes'),
@@ -89,6 +116,8 @@
                         clearInterval(interval);
                         var audio = document.getElementById('alarm');
                         audio.play();
+                        clicked = 2;
+                        console.log(clicked);
                     }
                     else {
                         if (this.seconds.textContent === "00") {
@@ -122,47 +151,15 @@
                 this.setToWorkMode();
             }
         }
+
         var view = {
             setUpEventListeners: function () {
-                var workButton = document.getElementById('work');
-                var workMode = function () {
-                    controls.setToWorkMode();
-                };
+
                 workButton.addEventListener('click', workMode);
-
-
-                var breakButton = document.getElementById('break');
-                var breakMode = function () {
-                    controls.setToBreakMode();
-                }
                 breakButton.addEventListener('click', breakMode);
-
-                var plusButton = document.getElementById('plus');
-                var increaseTime = function () {
-                    controls.increaseTime();
-                }
                 plusButton.addEventListener('click', increaseTime);
-
-
-                var minusButton = document.getElementById('minus');
-                var decreaseTime = function () {
-                    controls.decreaseTime();
-                };
                 minusButton.addEventListener('click', decreaseTime);
-
-                var startButton = document.getElementById('start');
-                var clicked = 0;
-                var startTimer = function () {
-                    controls.startTimer();
-                    clicked++;
-                    workButton.removeEventListener('click', workMode);
-                    breakButton.removeEventListener('click', breakMode);
-                    plusButton.removeEventListener('click', increaseTime);
-                    minusButton.removeEventListener('click', decreaseTime);
-                    startButton.removeEventListener('click', startTimer);
-                }
                 startButton.addEventListener('click', startTimer);
-                var resetButton = document.getElementById('reset');
                 resetButton.addEventListener('click', function () {
                     controls.resetTimer();
                 })
