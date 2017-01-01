@@ -20,7 +20,7 @@
                 <h2 class="work" id="mode">Work</h2>
                 <div class="time-settings">
                     <p id="plus" class="arithmetic-controls"><a href="#">+</a></p>
-                    <p class="time"> <span id="minutes">00</span> : <span id="seconds">10</span></p>
+                    <p class="time"> <span id="minutes">00</span> : <span id="seconds">05</span></p>
                     <p id="minus" class="arithmetic-controls"><a href="#">- </a></p>
                 </div>
             </div>
@@ -33,6 +33,8 @@
     <audio src="http://www.orangefreesounds.com/wp-content/uploads/2015/04/Loud-alarm-clock-sound.mp3" id="alarm" preload="auto">
     </audio>
     <script>
+        var audio = document.getElementById('alarm');
+        var interval;
         var controls = {
             modeSetting: document.getElementById('mode'),
             minutes: document.getElementById('minutes'),
@@ -83,12 +85,12 @@
                 }
             },
             startTimer: function () {
-                var interval = setInterval(reduceSeconds, 1000);
+                interval = setInterval(reduceSeconds, 1000);
                 function reduceSeconds() {
                     if (this.seconds.textContent === "00" && (this.minutes.textContent === "0" || this.minutes.textContent === "00")) {
                         clearInterval(interval);
-                        var audio = document.getElementById('alarm');
                         audio.play();
+                        view.setUpEventListeners();
                     }
                     else {
                         if (this.seconds.textContent === "00") {
@@ -120,12 +122,15 @@
             },
             resetTimer: function () {
                 this.setToWorkMode();
+                clearInterval(interval);
+                view.setUpEventListeners();
             }
         }
         var view = {
             setUpEventListeners: function () {
                 var workButton = document.getElementById('work');
                 var workMode = function () {
+                    audio.pause();
                     controls.setToWorkMode();
                 };
                 workButton.addEventListener('click', workMode);
@@ -133,12 +138,14 @@
 
                 var breakButton = document.getElementById('break');
                 var breakMode = function () {
+                    audio.pause();
                     controls.setToBreakMode();
                 }
                 breakButton.addEventListener('click', breakMode);
 
                 var plusButton = document.getElementById('plus');
                 var increaseTime = function () {
+                    audio.pause();
                     controls.increaseTime();
                 }
                 plusButton.addEventListener('click', increaseTime);
@@ -146,6 +153,7 @@
 
                 var minusButton = document.getElementById('minus');
                 var decreaseTime = function () {
+                    audio.pause();
                     controls.decreaseTime();
                 };
                 minusButton.addEventListener('click', decreaseTime);
@@ -164,6 +172,7 @@
                 startButton.addEventListener('click', startTimer);
                 var resetButton = document.getElementById('reset');
                 resetButton.addEventListener('click', function () {
+                    audio.pause();
                     controls.resetTimer();
                 })
             }
