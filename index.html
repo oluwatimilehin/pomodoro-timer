@@ -87,6 +87,8 @@
                 function reduceSeconds() {
                     if (this.seconds.textContent === "00" && (this.minutes.textContent === "0" || this.minutes.textContent === "00")) {
                         clearInterval(interval);
+                        var audio = document.getElementById('alarm');
+                        audio.play();
                     }
                     else {
                         if (this.seconds.textContent === "00") {
