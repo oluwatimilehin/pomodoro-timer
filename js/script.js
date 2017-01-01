@@ -1,5 +1,10 @@
+/**
+ * Create global variables
+ */
 var audio = document.getElementById('alarm');
 var interval;
+
+
 var controls = {
     modeSetting: document.getElementById('mode'),
     minutes: document.getElementById('minutes'),
@@ -63,7 +68,6 @@ var controls = {
                     this.currentSeconds--;
                     if (this.minutes.textContent <= 10) {
                         this.minutes.textContent--;
-                        this.seconds.textContent;
                         this.minutes.textContent = "0" + this.minutes.textContent;
                     }
                     else {
