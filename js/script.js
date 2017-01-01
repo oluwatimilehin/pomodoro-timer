@@ -99,15 +99,6 @@ var view = {
             controls.setToWorkMode();
         };
         workButton.addEventListener('click', workMode);
-
-
-        var breakButton = document.getElementById('break');
-        var breakMode = function () {
-            audio.pause();
-            controls.setToBreakMode();
-        }
-        breakButton.addEventListener('click', breakMode);
-
         var plusButton = document.getElementById('plus');
         var increaseTime = function () {
             audio.pause();
@@ -115,13 +106,21 @@ var view = {
         }
         plusButton.addEventListener('click', increaseTime);
 
-
         var minusButton = document.getElementById('minus');
         var decreaseTime = function () {
             audio.pause();
             controls.decreaseTime();
         };
         minusButton.addEventListener('click', decreaseTime);
+
+        var breakButton = document.getElementById('break');
+        var breakMode = function () {
+            audio.pause();
+            controls.setToBreakMode();
+            plusButton.removeEventListener('click', increaseTime);
+            minusButton.removeEventListener('click', decreaseTime);
+        }
+        breakButton.addEventListener('click', breakMode);
 
         var startButton = document.getElementById('start');
         var clicked = 0;
