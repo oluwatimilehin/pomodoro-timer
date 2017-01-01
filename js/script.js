@@ -15,7 +15,9 @@ var controls = {
     currentSeconds: parseInt(this.seconds.textContent),
     setToWorkMode: function () {
         this.minutes.textContent = "25";
+        this.currentMinutes = 25;
         this.seconds.textContent = "00";
+        this.currentSeconds = 0;
         this.modeSetting.textContent = "Work";
     },
     setToBreakMode: function () {
@@ -34,6 +36,7 @@ var controls = {
             this.minutes.textContent = this.currentMinutes;
             if (this.minutes.textContent < 10) {
                 this.minutes.textContent = "0" + this.minutes.textContent; //Ensure that double digits are always displayed.
+                this.seconds.textContent;
             }
             this.currentSeconds = 0;
         }
@@ -60,6 +63,8 @@ var controls = {
         interval = setInterval(reduceSeconds, 1000);
         function reduceSeconds() {
             if (this.seconds.textContent === "00" && (this.minutes.textContent === "0" || this.minutes.textContent === "00")) {
+                this.currentSeconds = 0;
+                this.currentMinutes = 0;
                 clearInterval(interval);
                 audio.play();
                 view.setUpEventListeners();
