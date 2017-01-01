@@ -97,13 +97,15 @@ var view = {
         var workMode = function () {
             audio.pause();
             controls.setToWorkMode();
+            plusButton.addEventListener('click', increaseTime);
+            minusButton.addEventListener('click', decreaseTime);
         };
         workButton.addEventListener('click', workMode);
         var plusButton = document.getElementById('plus');
         var increaseTime = function () {
             audio.pause();
             controls.increaseTime();
-        }
+        };
         plusButton.addEventListener('click', increaseTime);
 
         var minusButton = document.getElementById('minus');
@@ -119,7 +121,7 @@ var view = {
             controls.setToBreakMode();
             plusButton.removeEventListener('click', increaseTime);
             minusButton.removeEventListener('click', decreaseTime);
-        }
+        };
         breakButton.addEventListener('click', breakMode);
 
         var startButton = document.getElementById('start');
@@ -132,13 +134,13 @@ var view = {
             plusButton.removeEventListener('click', increaseTime);
             minusButton.removeEventListener('click', decreaseTime);
             startButton.removeEventListener('click', startTimer);
-        }
+        };
         startButton.addEventListener('click', startTimer);
         var resetButton = document.getElementById('reset');
         resetButton.addEventListener('click', function () {
             audio.pause();
             controls.resetTimer();
-        })
+        });
     }
-}
+};
 view.setUpEventListeners();
