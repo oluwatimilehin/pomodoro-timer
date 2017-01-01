@@ -30,7 +30,8 @@
             <h3 class="has-border" id="reset"><a href="#">Reset </a> </h3>
         </div>
     </div>
-
+    <audio src="http://www.orangefreesounds.com/wp-content/uploads/2015/04/Loud-alarm-clock-sound.mp3" id="alarm" preload="auto">
+    </audio>
     <script>
         var controls = {
             modeSetting: document.getElementById('mode'),
@@ -38,6 +39,7 @@
             seconds: document.getElementById('seconds'),
             currentMinutes: parseInt(this.minutes.textContent),
             currentSeconds: parseInt(this.seconds.textContent),
+            interval: null,
             setToWorkMode: function () {
                 this.minutes.textContent = "25";
                 this.seconds.textContent = "00";
@@ -82,9 +84,10 @@
                 }
             },
             startTimer: function () {
-                var clicked = 0;
+                interval: setInterval(reduceSeconds, 1000);
                 function reduceSeconds() {
                     if (this.seconds.textContent === "00" && (this.minutes.textContent === "0" || this.minutes.textContent === "00")) {
+                        clearInterval(this.interval);
                         return null;
                     }
                     else {
@@ -113,10 +116,6 @@
                             }
                         }
                     }
-                }
-                if (clicked != null) {
-                    console.log(clicked);
-                    var interval = setInterval(reduceSeconds, 1000);
                 }
             },
             resetTimer: function () {
@@ -154,18 +153,12 @@
                 var startButton = document.getElementById('start');
                 var clicked = 0;
                 var startTimer = function () {
-                    if (clicked === null) {
-                        return;
-                    }
-                    if (clicked === 0) {
-                        controls.startTimer();
-                        clicked++;
-                        workButton.removeEventListener('click', workMode);
-                        breakButton.removeEventListener('click', breakMode);
-                        plusButton.removeEventListener('click', increaseTime);
-                        minusButton.removeEventListener('click', decreaseTime);
-                    }
-
+                    controls.startTimer();
+                    clicked++;
+                    workButton.removeEventListener('click', workMode);
+                    breakButton.removeEventListener('click', breakMode);
+                    plusButton.removeEventListener('click', increaseTime);
+                    minusButton.removeEventListener('click', decreaseTime);
                 }
                 startButton.addEventListener('click', startTimer);
                 var resetButton = document.getElementById('reset');
