@@ -1,10 +1,12 @@
 /**
- * Create global variables
+ * These are the global variables which are accessed by both objects.
  */
 var audio = document.getElementById('alarm');
 var interval;
 
-
+/**
+ * This is the object which controls the state of the timer.
+ */
 var controls = {
     modeSetting: document.getElementById('mode'),
     minutes: document.getElementById('minutes'),
@@ -28,17 +30,17 @@ var controls = {
         }
         else {
             this.seconds.textContent = "00";
-            this.currentMinutes++;
+            this.currentMinutes++; //The current minute increases by 1 for everytime we have 60 seconds.
             this.minutes.textContent = this.currentMinutes;
             if (this.minutes.textContent < 10) {
-                this.minutes.textContent = "0" + this.minutes.textContent;
+                this.minutes.textContent = "0" + this.minutes.textContent; //Ensure that double digits are always displayed.
             }
             this.currentSeconds = 0;
         }
     },
     decreaseTime: function () {
         this.currentSeconds -= 30;
-        if (this.seconds.textContent === "00" && (this.minutes.textContent === "0" || this.minutes.textContent === "00")) {
+        if (this.seconds.textContent === "00" && this.minutes.textContent === "00") {
             return;
         }
         if (this.currentSeconds === 0) {
