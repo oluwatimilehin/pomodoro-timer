@@ -36,7 +36,7 @@ var controls = {
             this.minutes.textContent = this.currentMinutes;
             if (this.minutes.textContent < 10) {
                 this.minutes.textContent = "0" + this.minutes.textContent; //Ensure that double digits are always displayed.
-                this.seconds.textContent;
+                //    this.seconds.textContent;
             }
             this.currentSeconds = 0;
         }
@@ -67,7 +67,6 @@ var controls = {
                 this.currentMinutes = 0;
                 clearInterval(interval);
                 audio.play();
-                view.setUpEventListeners();
             }
             else {
                 if (this.seconds.textContent === "00") {
@@ -99,9 +98,11 @@ var controls = {
     resetTimer: function () {
         this.setToWorkMode();
         clearInterval(interval);
+        console.log(this.currentMinutes);
+        console.log(this.currentSeconds);
         view.setUpEventListeners();
     }
-}
+};
 var view = {
     setUpEventListeners: function () {
         var workButton = document.getElementById('work');
