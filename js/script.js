@@ -29,7 +29,6 @@ var controls = {
         this.modeSetting.textContent = "Break";
     },
     increaseTime: function () {
-        this.currentSeconds = this.seconds.textContent;
         this.currentSeconds += 30;
         if (this.currentSeconds === 30) {
             this.seconds.textContent = this.currentSeconds;
@@ -43,7 +42,7 @@ var controls = {
                 this.minutes.textContent = "0" + this.minutes.textContent; //Ensure that double digits are always `displayed.
                 //    this.seconds.textContent;
             }
-            this.currentSeconds = 0;
+            //  this.currentSeconds = 0;
         }
         console.log(this.currentSeconds);
         console.log(this.currentMinutes);
