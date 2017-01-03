@@ -34,6 +34,7 @@ var controls = {
             this.seconds.textContent = this.currentSeconds;
         }
         else {
+            this.currentSeconds = 0;
             this.seconds.textContent = "00";
             this.currentMinutes++; //The current minute increases by 1 for everytime we have 60 seconds.
             this.minutes.textContent = this.currentMinutes;
