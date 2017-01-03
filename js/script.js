@@ -144,8 +144,8 @@ var view = {
             that.workButton.removeEventListener('click', that.workMode);
             that.plusButton.removeEventListener('click', that.increaseTime);
             that.minusButton.removeEventListener('click', that.decreaseTime);
-            that.startButton.removeEventListener('click', startTimer);
             that.breakButton.removeEventListener('click', that.breakMode);
+            that.startButton.removeEventListener('click', startTimer);
         };
         this.startButton.addEventListener('click', startTimer);
     },
@@ -154,6 +154,7 @@ var view = {
         this.breakButton.addEventListener('click', this.breakMode);
         this.plusButton.addEventListener('click', this.increaseTime);
         this.minusButton.addEventListener('click', this.decreaseTime);
+        this.startButton.addEventListener('click', startTimer);
     }
 };
 view.setUpEventListeners();
