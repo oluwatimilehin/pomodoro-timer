@@ -62,7 +62,6 @@ var controls = {
         }
     },
     startTimer: function () {
-        controls.startTimer = 0;
         interval = setInterval(reduceSeconds, 1000);
         function reduceSeconds() {
             if (this.seconds.textContent === "00" && (this.minutes.textContent === "0" || this.minutes.textContent === "00")) {
@@ -135,20 +134,21 @@ var view = {
     },
 
     setUpEventListeners: function () {
-        this.workButton.addEventListener('click', this.workMode);
-        this.plusButton.addEventListener('click', this.increaseTime);
-        this.minusButton.addEventListener('click', this.decreaseTime);
-        this.breakButton.addEventListener('click', this.breakMode);
-        this.startButton.addEventListener('click', startTimer);
-        this.resetButton.addEventListener('click', this.resetTimer);
         var startTimer = function () {
             controls.startTimer();
             this.workButton.removeEventListener('click', this.workMode);
             this.breakButton.removeEventListener('click', this.breakMode);
             this.plusButton.removeEventListener('click', this.increaseTime);
             this.minusButton.removeEventListener('click', this.decreaseTime);
-            this.startButton.removeEventListener('click', this.startTimer);
+            this.startButton.removeEventListener('click', startTimer);
         };
+        this.workButton.addEventListener('click', this.workMode);
+        this.plusButton.addEventListener('click', this.increaseTime);
+        this.minusButton.addEventListener('click', this.decreaseTime);
+        this.breakButton.addEventListener('click', this.breakMode);
+        this.startButton.addEventListener('click', startTimer);
+        this.resetButton.addEventListener('click', this.resetTimer);
+
     },
     addRemovedListeners: function () {
         this.workButton.addEventListener('click', this.workMode);
