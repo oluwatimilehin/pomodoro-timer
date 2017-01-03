@@ -3,6 +3,7 @@
  */
 var audio = document.getElementById('alarm');
 var interval;
+var startTimer;
 
 /**
  * This is the object which controls the state of the timer.
@@ -37,11 +38,13 @@ var controls = {
             this.currentMinutes++; //The current minute increases by 1 for everytime we have 60 seconds.
             this.minutes.textContent = this.currentMinutes;
             if (this.minutes.textContent < 10) {
-                this.minutes.textContent = "0" + this.minutes.textContent; //Ensure that double digits are always displayed.
+                this.minutes.textContent = "0" + this.minutes.textContent; //Ensure that double digits are always `displayed.
                 //    this.seconds.textContent;
             }
             this.currentSeconds = 0;
         }
+        console.log(this.currentSeconds);
+        console.log(this.currentMinutes);
     },
     decreaseTime: function () {
         this.currentSeconds -= 30;
@@ -139,7 +142,7 @@ var view = {
         this.breakButton.addEventListener('click', this.breakMode);
         this.resetButton.addEventListener('click', this.resetTimer);
         var that = this;
-        var startTimer = function () {
+        startTimer = function () {
             controls.startTimer();
             that.workButton.removeEventListener('click', that.workMode);
             that.plusButton.removeEventListener('click', that.increaseTime);
