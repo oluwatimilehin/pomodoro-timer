@@ -30,7 +30,7 @@ var controls = {
     },
     increaseTime: function () {
         this.currentSeconds += 30;
-        if(this.currentMinutes === 99 && this.currentSeconds === 0){
+        if (this.minutes.textContent === "99" && this.seconds.textContent === "00") {
             return;
         }
         if (this.currentSeconds === 30) {
