@@ -29,6 +29,7 @@ var controls = {
         this.modeSetting.textContent = "Break";
     },
     increaseTime: function () {
+        this.currentSeconds = this.seconds.textContent;
         this.currentSeconds += 30;
         if (this.currentSeconds === 30) {
             this.seconds.textContent = this.currentSeconds;
