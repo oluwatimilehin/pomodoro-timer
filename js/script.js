@@ -132,30 +132,28 @@ var view = {
         audio.pause();
         controls.resetTimer();
     },
-
     setUpEventListeners: function () {
-        var startTimer = function () {
-            controls.startTimer();
-            this.workButton.removeEventListener('click', this.workMode);
-            this.breakButton.removeEventListener('click', this.breakMode);
-            this.plusButton.removeEventListener('click', this.increaseTime);
-            this.minusButton.removeEventListener('click', this.decreaseTime);
-            this.startButton.removeEventListener('click', startTimer);
-        };
         this.workButton.addEventListener('click', this.workMode);
         this.plusButton.addEventListener('click', this.increaseTime);
         this.minusButton.addEventListener('click', this.decreaseTime);
         this.breakButton.addEventListener('click', this.breakMode);
-        this.startButton.addEventListener('click', startTimer);
         this.resetButton.addEventListener('click', this.resetTimer);
-
+        var that = this;
+        var startTimer = function () {
+            controls.startTimer();
+            that.workButton.removeEventListener('click', that.workMode);
+            that.plusButton.removeEventListener('click', that.increaseTime);
+            that.minusButton.removeEventListener('click', that.decreaseTime);
+            that.startButton.removeEventListener('click', startTimer);
+            that.breakButton.removeEventListener('click', that.breakMode);
+        };
+        this.startButton.addEventListener('click', startTimer);
     },
     addRemovedListeners: function () {
         this.workButton.addEventListener('click', this.workMode);
         this.breakButton.addEventListener('click', this.breakMode);
         this.plusButton.addEventListener('click', this.increaseTime);
         this.minusButton.addEventListener('click', this.decreaseTime);
-    },
-
+    }
 };
 view.setUpEventListeners();
