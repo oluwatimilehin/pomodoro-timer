@@ -3,45 +3,6 @@
  */
 var audio = document.getElementById('alarm');
 var interval;
-var workButton = document.getElementById('work');
-var workMode = function () {
-    audio.pause();
-    controls.setToWorkMode();
-    plusButton.addEventListener('click', increaseTime);
-    minusButton.addEventListener('click', decreaseTime);
-};
-var plusButton = document.getElementById('plus');
-var increaseTime = function () {
-    audio.pause();
-    controls.increaseTime();
-};
-var minusButton = document.getElementById('minus');
-var decreaseTime = function () {
-    audio.pause();
-    controls.decreaseTime();
-};
-var breakButton = document.getElementById('break');
-var breakMode = function () {
-    audio.pause();
-    controls.setToBreakMode();
-    plusButton.removeEventListener('click', increaseTime);
-    minusButton.removeEventListener('click', decreaseTime);
-};
-var resetButton = document.getElementById('reset');
-var resetTimer = function () {
-    audio.pause();
-    controls.resetTimer();
-};
-var startButton = document.getElementById('start');
-var startTimer = function () {
-    controls.startTimer();
-    workButton.removeEventListener('click', workMode);
-    breakButton.removeEventListener('click', breakMode);
-    plusButton.removeEventListener('click', increaseTime);
-    minusButton.removeEventListener('click', decreaseTime);
-    startButton.removeEventListener('click', startTimer);
-};
-
 
 /**
  * This is the object which controls the state of the timer.
@@ -144,19 +105,57 @@ var controls = {
     }
 };
 var view = {
-    setUpEventListeners: function () {
-        workButton.addEventListener('click', workMode);
-        plusButton.addEventListener('click', increaseTime);
-        minusButton.addEventListener('click', decreaseTime);
-        breakButton.addEventListener('click', breakMode);
-        startButton.addEventListener('click', startTimer);
-        resetButton.addEventListener('click', resetTimer);
+    workButton: document.getElementById('work'),
+    plusButton: document.getElementById('plus'),
+    minusButton: document.getElementById('minus'),
+    breakButton: document.getElementById('break'),
+    resetButton: document.getElementById('reset'),
+    startButton: document.getElementById('start'),
+    workMode: function () {
+        audio.pause();
+        controls.setToWorkMode();
     },
+    increaseTime: function () {
+        audio.pause();
+        controls.increaseTime();
+    },
+    decreaseTime: function () {
+        audio.pause();
+        controls.decreaseTime();
+    },
+    breakMode: function () {
+        audio.pause();
+        controls.setToBreakMode();
+        this.plusButton.removeEventListener('click', this.increaseTime);
+        this.minusButton.removeEventListener('click', this.decreaseTime);
+    },
+    resetTimer: function () {
+        audio.pause();
+        controls.resetTimer();
+    },
+    setUpEventListeners: function () {
+        this.workButton.addEventListener('click', this.workMode);
+        this.plusButton.addEventListener('click', this.increaseTime);
+        this.minusButton.addEventListener('click', this.decreaseTime);
+        this.breakButton.addEventListener('click', this.breakMode);
+        this.startButton.addEventListener('click', this.startTimer);
+        this.resetButton.addEventListener('click', this.resetTimer);
+    },
+    startTimer: function () {
+        controls.startTimer();
+        this.workButton.removeEventListener('click', this.workMode);
+        this.breakButton.removeEventListener('click', this.breakMode);
+        this.plusButton.removeEventListener('click', this.increaseTime);
+        this.minusButton.removeEventListener('click', this.decreaseTime);
+        this.startButton.removeEventListener('click', this.startTimer);
+    },
+
     addRemovedListeners: function () {
-        workButton.addEventListener('click', workMode);
-        breakButton.addEventListener('click', breakMode);
-        plusButton.addEventListener('click', increaseTime);
-        minusButton.addEventListener('click', decreaseTime);
-    }
+        this.workButton.addEventListener('click', this.workMode);
+        this.breakButton.addEventListener('click', this.breakMode);
+        this.plusButton.addEventListener('click', this.increaseTime);
+        this.minusButton.addEventListener('click', this.decreaseTime);
+    },
+
 };
 view.setUpEventListeners();
