@@ -68,12 +68,13 @@ var controls = {
     },
     startTimer: function () {
         interval = setInterval(reduceSeconds, 1000);
+        var that = this;
         function reduceSeconds() {
             if (this.seconds.textContent === "00" && (this.minutes.textContent === "0" || this.minutes.textContent === "00")) {
                 clearInterval(interval);
                 view.addRemovedListeners();
-                this.currentSeconds = 0;
-                this.currentMinutes = 0;
+                that.currentSeconds = 0;
+                that.currentMinutes = 0;
                 audio.play();
                 return;
             }
