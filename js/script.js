@@ -45,8 +45,6 @@ var controls = {
                 this.minutes.textContent = "0" + this.minutes.textContent; //Ensure that double digits are always `displayed.
             }
         }
-        console.log(this.currentSeconds);
-        console.log(this.currentMinutes);
     },
     decreaseTime: function () {
         this.currentSeconds -= 30;
