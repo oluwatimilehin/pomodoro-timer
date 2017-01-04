@@ -51,6 +51,8 @@ var controls = {
     decreaseTime: function () {
         this.currentSeconds -= 30;
         if (this.seconds.textContent === "00" && this.minutes.textContent === "00") {
+            this.currentMinutes = 0;
+            this.currentSeconds = 0;
             return;
         }
         if (this.currentSeconds === 0) {
@@ -72,6 +74,8 @@ var controls = {
             if (this.seconds.textContent === "00" && (this.minutes.textContent === "0" || this.minutes.textContent === "00")) {
                 clearInterval(interval);
                 view.addRemovedListeners();
+                this.currentSeconds = 0;
+                this.currentMinutes = 0;
                 audio.play();
                 return;
             }
@@ -101,8 +105,7 @@ var controls = {
                 }
             }
         }
-        this.currentSeconds = 0;
-        this.currentMinutes = 0;
+
     },
     resetTimer: function () {
         this.setToWorkMode();
