@@ -112,6 +112,9 @@ var controls = {
         view.addRemovedListeners();
     }
 };
+/**
+ * Object which controls the page elements
+ */
 var view = {
     workButton: document.getElementById('work'),
     plusButton: document.getElementById('plus'),
