@@ -148,7 +148,7 @@ var view = {
         this.minusButton.addEventListener('click', this.decreaseTime);
         this.breakButton.addEventListener('click', this.breakMode);
         this.resetButton.addEventListener('click', this.resetTimer);
-        var that = this;
+        var that = this; //Done so that the inner function has access to this object
         startTimer = function () {
             controls.startTimer();
             that.workButton.removeEventListener('click', that.workMode);
