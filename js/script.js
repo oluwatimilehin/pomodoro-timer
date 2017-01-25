@@ -14,6 +14,9 @@ var controls = {
     seconds: document.getElementById('seconds'),
     currentMinutes: parseInt(this.minutes.textContent),
     currentSeconds: parseInt(this.seconds.textContent),
+    /**
+     *  Set timer to 25 minutes
+     */
     setToWorkMode: function () {
         this.minutes.textContent = "25";
         this.currentMinutes = 25;
@@ -21,6 +24,9 @@ var controls = {
         this.currentSeconds = 0;
         this.modeSetting.textContent = "Work";
     },
+    /**
+     * Set timer to 5 minutes
+     */
     setToBreakMode: function () {
         this.minutes.textContent = "05";
         this.seconds.textContent = "00";
@@ -29,7 +35,13 @@ var controls = {
         this.modeSetting.textContent = "Break";
     },
     increaseTime: function () {
+        /**
+         * Increase the current time by 30 seconds
+         */
         this.currentSeconds += 30;
+        /**
+         * Set maximum time allowed to 99 minutes
+         */
         if (this.minutes.textContent === "99" && this.seconds.textContent === "00") {
             return;
         }
@@ -42,12 +54,15 @@ var controls = {
             this.currentMinutes++; //The current minute increases by 1 for everytime we have 60 seconds.
             this.minutes.textContent = this.currentMinutes;
             if (this.minutes.textContent < 10) {
-                this.minutes.textContent = "0" + this.minutes.textContent; //Ensure that double digits are always `displayed.
+                this.minutes.textContent = "0" + this.minutes.textContent; //Ensure that double digits are always displayed.
             }
         }
     },
     decreaseTime: function () {
         this.currentSeconds -= 30;
+        /**
+         * Ensure that time does not go to negative values
+         */
         if (this.seconds.textContent === "00" && this.minutes.textContent === "00") {
             this.currentMinutes = 0;
             this.currentSeconds = 0;
@@ -68,9 +83,12 @@ var controls = {
     },
     startTimer: function () {
         interval = setInterval(reduceSeconds, 1000);
-        var that = this;
+        var that = this;//This is declared so that the inner function can access the current object
         function reduceSeconds() {
-            if (this.seconds.textContent === "00" && (this.minutes.textContent === "0" || this.minutes.textContent === "00")) {
+            /**
+             * When the timer shows 00:00, clear the interval and reset the timer.
+             */
+            if (that.seconds.textContent === "00" && that.minutes.textContent === "00") {
                 clearInterval(interval);
                 view.addRemovedListeners();
                 that.currentSeconds = 0;
@@ -82,6 +100,9 @@ var controls = {
                 if (this.seconds.textContent === "00") {
                     this.currentSeconds = 60;
                     this.currentSeconds--;
+                    /**
+                    * This block ensures that the minute section shows double digits when below 10.
+                    */
                     if (this.minutes.textContent <= 10) {
                         this.minutes.textContent--;
                         this.minutes.textContent = "0" + this.minutes.textContent;
@@ -91,6 +112,9 @@ var controls = {
                     }
                     this.seconds.textContent = this.currentSeconds;
                 }
+                /**
+                 * Block for anytime that the timer is not on 60 seconds
+                 */
                 else {
                     this.seconds.textContent--;
                     if (this.seconds.textContent === 0) {
@@ -151,6 +175,9 @@ var view = {
         var that = this; //Done so that the inner function has access to this object
         startTimer = function () {
             controls.startTimer();
+            /**
+             * When the timer starts, remove the event listeners
+             */
             that.workButton.removeEventListener('click', that.workMode);
             that.plusButton.removeEventListener('click', that.increaseTime);
             that.minusButton.removeEventListener('click', that.decreaseTime);
@@ -159,6 +186,9 @@ var view = {
         };
         this.startButton.addEventListener('click', startTimer);
     },
+    /**
+     * When the timer stops or is reset, return the removed event listeners
+     */
     addRemovedListeners: function () {
         this.workButton.addEventListener('click', this.workMode);
         this.breakButton.addEventListener('click', this.breakMode);
