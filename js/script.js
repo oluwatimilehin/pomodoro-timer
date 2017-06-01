@@ -192,8 +192,7 @@ var view = {
     addRemovedListeners: function () {
         this.workButton.addEventListener('click', this.workMode);
         this.breakButton.addEventListener('click', this.breakMode);
-        this.plusButton.addEventListener('click', this.increaseTime);
-        this.minusButton.addEventListener('click', this.decreaseTime);
+        this.plusButton.addEventListener('click', this.decreaseTime);
         this.startButton.addEventListener('click', startTimer);
     }
 };
